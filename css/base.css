@@ -1,0 +1,41 @@
+body{
+    background:#00334b;
+    color: #fff;
+}
+input{
+    border: 0;
+    outline: none;
+}
+.container{
+    max-width: 800px;
+    margin: 0 auto;
+
+}
+.container h1{
+    text-align: center;
+}
+.add-task input,.remind input{
+    display: block;
+    width: 100%;
+    background: #ddd;
+}
+.add-task input,.remind input,.task-item{
+    padding: 10px;
+    border-radius: 3px;
+}
+
+.task-list{
+    margin:5px 0;
+}
+.task-item{
+    padding: 10px;
+    background: #fff;
+    color: #333;
+    margin-bottom: 2px;
+    box-shadow: 0 2px 3px rgba(0,0,0,.4);
+    cursor: pointer;
+    transition: background .2s;
+}
+.task-item:hover{
+    background: #ddd;
+}

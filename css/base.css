@@ -1,4 +1,4 @@
-input{
+input,button{
     border: 0;
     outline: none;
 }
@@ -7,26 +7,54 @@ body{
     background:#00334b;
     color: #fff;
 }
+*{
+    box-sizing: border-box;
+    transition: background .2s;
+}
+
 .container{
     max-width: 800px;
     margin: 0 auto;
-
+    position: relative;
 }
 .container h1{
     text-align: center;
 }
+
 .add-task input,.remind input{
     display: block;
-    width: 100%;
+    width: 84%;
     background: #ddd;
+    float: left;
+    margin-right: 1%;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.3);
+}
+input:hover,input:focus{
+    background: #fff;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.2 );
 }
 .add-task input,.remind input,.task-item{
     padding: 10px;
     border-radius: 3px;
 }
+.add-task button,.remind button{
+    padding:10px;
+    width: 15%;
+    border-radius: 3px;
+    box-sizing: border-box;
+    display: inline-block;
+    cursor: pointer;
+    background: #56b1e4;
+    box-shadow: 0 2px 3px rgba(0,0,0,.4);
+    color: #333;
+}
+.add-task button:hover,.remind button:hover{
+    background: #5fb9e4;
+}
+
 
 .task-list{
-    margin:5px 0;
+    margin:10px 0;
 }
 .task-item{
     padding: 10px;
@@ -39,4 +67,22 @@ body{
 }
 .task-item:hover{
     background: #ddd;
+}
+
+.task-detail{
+    position: absolute;
+    bottom:0;
+    right: 0;
+    padding:10px;
+    background: #fff;
+
+}
+.task-detail-mask{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(30,30,30,.6);
+    display: none;
 }

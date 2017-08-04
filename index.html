@@ -14,6 +14,7 @@
       <button>submit</button>
     </div>
     <div class="task-list"><!--清单列表开始-->
+      <div class="task-detail-mask"></div>
       <div class="task-item"><!--任务开始-->
         <span><input type="checkbox"></span>
         <span class="task-content">item0</span>
@@ -34,16 +35,18 @@
       </div><!--任务结束-->
     </div><!--清单列表结束-->
     <div class="task-detail"><!--任务详情开始-->
-      <div class="content"></div>
-      <div class="">
-        <div class="desc"></div>
+      <div class="title">下午记得买菜</div>
+      <div class=""><!--任务描述开始-->
+        <div class="desc">
+          <textarea name="" id=""></textarea>
+        </div><!--任务描述结束-->
       </div>
       <div class="remind">
         <input type="date">
-        <button type="submit">提交</button>
+        <!--<button type="submit">提交</button>-->
       </div>
     </div><!--任务详情结束-->
-    <div class="task-detail-mask"></div>
+
   </div><!--总容器结束-->
 <script src="node_modules/jquery/dist/jquery.min.js"></script>
   <script src="js/base.js"></script>

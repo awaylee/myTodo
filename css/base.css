@@ -13,10 +13,14 @@ body{
     box-sizing: border-box;
     transition: background .2s;
 }
+.fr{
+    float: right;
+}
 
 .container{
     max-width: 800px;
     margin: 0 auto;
+    padding: 0 10px;
     position: relative;
 }
 .container h1{
@@ -80,6 +84,8 @@ input:hover,input:focus{
     left: 0;
     right: 0;
     background: rgba(30,30,30,.6);
+    display: none;
+
 }
 
 .task-detail{
@@ -91,7 +97,7 @@ input:hover,input:focus{
      padding:10px;
      background: #fff;
      color: #333;
- }
+}
 .task-detail .title{
     padding:10px;
     font-weight: 900;
@@ -104,4 +110,15 @@ input:hover,input:focus{
 .desc textarea{
     width: 100%;
     min-height: 100px;
+}
+.action{
+    color: #888;
+    font-size: 90%;
+}
+.action:hover{
+    color: #333;
+}
+
+.task-content{
+    margin-left: 10px;
 }

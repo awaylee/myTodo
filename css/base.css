@@ -90,20 +90,22 @@ input:hover,input:focus{
 
 .task-detail{
      position: absolute;
+     z-index: 2;
      bottom:0;
      right: 0;
      width: 50%;
-     height: 100%;
+     min-height: 300px;
      padding:10px;
      background: #fff;
      color: #333;
+     display: none;
 }
 .task-detail .title{
     padding:10px;
     font-weight: 900;
     cursor: pointer;
 }
-.task-detail>*{
+.detail_wrapper>*{
     margin-bottom: 10px;
     overflow: hidden;
 }

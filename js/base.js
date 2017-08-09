@@ -8,7 +8,12 @@
   var $form_add_task = $('.add-task'),
       new_task = {},
       task_list = {},
-      $delete_task
+      $delete_task,
+      $detail_mask = $('.task-detail-mask'),
+      $detail = $('.task-detail'),
+      $detail_task,
+      current_index,
+      $update_form
       ;
 
 
@@ -50,6 +55,28 @@
     });
   }
 
+  function listen_detail() {
+    $detail_task.on('click',function () {
+      var index = $(this).parents('.task-item').data('index');
+      show_detail(index);
+
+    });
+  }
+
+  /*查看task详情*/
+  function show_detail(index) {
+    current_index = index;
+    $detail_mask.show();
+    $detail.show();
+    render_task_detail(index);
+  }
+
+  function update_task(index,data) {
+    if(index == undefined || !task_list[index]) return;
+    task_list[index] = $.merge({},task_list[index],data);
+    refresh_task_list();
+  }
+  
   function init() {
     task_list = store.get('task_list') || [];
     if(task_list.length){
@@ -102,7 +129,9 @@
     }
 
     $delete_task = $('.delete');
+    $detail_task = $('.detail');
     listen_delete_task();
+    listen_detail();
 
   }
 
@@ -110,7 +139,7 @@
    * 渲染单挑task模板
    * */
   function render_task_item(data,index) {
-    if(!data || !index) return;
+    if(!data || index == undefined) return;
     var list_item_tpl = '<div class="task-item" data-index="'+index+'">\
                           <span><input type="checkbox"></span>\
                           <span class="task-content">'+data.content+'</span>\
@@ -122,6 +151,40 @@
     return $(list_item_tpl);
   }
 
+  /**
+   * 渲染指定task的详细信息
+   * */
+  function render_task_detail(index){
+    if(index == undefined || !task_list[index]) return;
+    var item = task_list[index];
+    var tpl = '<form class="detail_wrapper"> \
+                <div class="title">'+item.content+'</div>\
+                <div class="desc">\
+                  <textarea name="desc" value="'+item.desc+'"></textarea>\
+                </div>\
+                <div class="remind">\
+                  <input type="date" name="date">\
+                  <button type="submit">更新</button>\
+                </div>\
+              </form>';
+    $('.task-detail').html(tpl);
+    $update_form = $('.task-detail').find('form');
+    $update_form.on('submit',function (e) {
+      e.preventDefault();
+      var data = {};
+      data.content = $(this).find('[name=content]').val();
+      data.desc = $(this).find('[name=desc]').val();
+      data.date = $(this).find('[name=date]').val();
+      update_task(index,data);
+      console.log(data)
+
+    })
+  }
+
+  $('.task-detail-mask').on('click',function () {
+    $(this).hide();
+    $detail.hide();
+  });
 
 
 

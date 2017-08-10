@@ -27,7 +27,7 @@ body{
     text-align: center;
 }
 
-.add-task input,.remind input,.desc textarea{
+.add-task input,.remind input,.desc textarea,input[name=title]{
     display: block;
     width: 84%;
     background: #ddd;
@@ -39,13 +39,12 @@ input:hover,input:focus{
     background: #fff;
     box-shadow: inset 0 1px 2px rgba(0,0,0,.2 );
 }
-.add-task input,.remind input,.task-item{
+.add-task input,.remind input,.task-item,input[name=title],.task-detail{
     padding: 10px;
     border-radius: 3px;
 }
-.add-task button,.remind button{
+button{
     padding:10px;
-    width: 15%;
     border-radius: 3px;
     box-sizing: border-box;
     display: inline-block;
@@ -54,7 +53,10 @@ input:hover,input:focus{
     box-shadow: 0 2px 3px rgba(0,0,0,.4);
     color: #333;
 }
-.add-task button:hover,.remind button:hover{
+.add-task button{
+    width: 15%;
+}
+button:hover{
     background: #5fb9e4;
 }
 .remind input{
@@ -99,6 +101,7 @@ input:hover,input:focus{
      background: #fff;
      color: #333;
      display: none;
+     box-shadow: 0 1px 2px 1px rgba(0,0,0,.1);
 }
 .task-detail .title{
     padding:10px;
@@ -123,4 +126,8 @@ input:hover,input:focus{
 
 .task-content{
     margin-left: 10px;
+}
+
+input[name=title]{
+    width: 100%;
 }

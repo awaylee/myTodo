@@ -13,7 +13,9 @@
       $detail = $('.task-detail'),
       $detail_task,
       current_index,
-      $update_form
+      $update_form,
+      $update_form_content,
+      $checkbox
       ;
 
 
@@ -59,8 +61,21 @@
     $detail_task.on('click',function () {
       var index = $(this).parents('.task-item').data('index');
       show_detail(index);
-
     });
+
+    $('.task-item').on('dblclick',function () {
+      var index = $(this).data('index');
+      show_detail(index);
+    })
+  }
+
+  function listen_checkbox() {
+    $checkbox.on('change',function () {
+      var index = $(this).parents('.task-item').data('index');
+      var flag = $(this).prop('checked');
+      console.log(flag);
+      update_task(index, {flag: flag});
+    })
   }
 
   /*查看task详情*/
@@ -73,7 +88,8 @@
 
   function update_task(index,data) {
     if(index == undefined || !task_list[index]) return;
-    task_list[index] = $.merge({},task_list[index],data);
+    task_list[index] = $.extend({},task_list[index],data);
+    // task_list[index] = data;
     refresh_task_list();
   }
   
@@ -125,13 +141,15 @@
 
     for (var i = 0; i <task_list.length; i++) {
       var $task = render_task_item(task_list[i],i);
-      $task_list.append($task);
+      $task_list.prepend($task);
     }
 
     $delete_task = $('.delete');
     $detail_task = $('.detail');
+    $checkbox = $('.task-list .complete');
     listen_delete_task();
     listen_detail();
+    listen_checkbox();
 
   }
 
@@ -141,7 +159,7 @@
   function render_task_item(data,index) {
     if(!data || index == undefined) return;
     var list_item_tpl = '<div class="task-item" data-index="'+index+'">\
-                          <span><input type="checkbox"></span>\
+                          <span><input class="complete" type="checkbox" '+(data.flag ? "checked" : "" ) + '></span>\
                           <span class="task-content">'+data.content+'</span>\
                           <span class="fr">\
                             <span class="action delete"> 删除</span>\
@@ -159,25 +177,35 @@
     var item = task_list[index];
     var tpl = '<form class="detail_wrapper"> \
                 <div class="title">'+item.content+'</div>\
+                <div style="display: none"><input type="text" name="title" value="'+item.content+'"></div>\
                 <div class="desc">\
-                  <textarea name="desc" value="'+item.desc+'"></textarea>\
+                  <textarea name="desc" value="">'+(item.desc || "" )+'</textarea>\
                 </div>\
                 <div class="remind">\
-                  <input type="date" name="date">\
-                  <button type="submit">更新</button>\
+                  <input type="date" name="date" value="'+(item.date || "" )+'">\
                 </div>\
+                <div><button type="submit">更新</button></div>\
               </form>';
     $('.task-detail').html(tpl);
     $update_form = $('.task-detail').find('form');
+    $update_form_content = $update_form.find('.title');
+
+    /**
+    * 更新详细
+    * */
     $update_form.on('submit',function (e) {
       e.preventDefault();
       var data = {};
-      data.content = $(this).find('[name=content]').val();
+      data.content = $(this).find('[name=title]').val();
       data.desc = $(this).find('[name=desc]').val();
       data.date = $(this).find('[name=date]').val();
       update_task(index,data);
-      console.log(data)
+      $detail_mask.hide();
+      $detail.hide();
+    });
 
+    $update_form_content.on('dblclick',function () {
+      $(this).hide().next().show();
     })
   }
 
@@ -185,6 +213,8 @@
     $(this).hide();
     $detail.hide();
   });
+
+
 
 
 

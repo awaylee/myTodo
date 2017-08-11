@@ -69,6 +69,9 @@
     })
   }
 
+  /**
+   * 监听完成task事件
+   * */
   function listen_checkbox() {
     $checkbox.on('change',function () {
       var index = $(this).parents('.task-item').data('index');
@@ -135,6 +138,41 @@
   /**
    * 渲染全部task模板
    * */
+/*  function render_task_list() {
+    var $task_list = $('.task-list');
+    $task_list.html('');
+    var flag_item = [];
+    for (var i = 0; i <task_list.length; i++) {
+      var item = task_list[i];
+      console.log('item',item)
+      // if(item && item.flag) {
+      //   flag_item.push(item);
+      // } else {
+      //   console.log('item',item)
+      //   var $task = render_task_item(item,i);
+      //
+      //   $task_list.prepend($task);
+      // }
+      var $task = render_task_item(item,i);
+
+      $task_list.prepend($task);
+    }
+
+    // console.log('flag_item',flag_item);
+    // for (var j = 0; j < flag_item.length; j++) {
+    //   var $task = render_task_item(flag_item[j],j);
+    //   $task.addClass('completed');
+    //   $task_list.append($task);
+    // }
+
+    $delete_task = $('.delete');
+    $detail_task = $('.detail');
+    $checkbox = $('.task-list .complete');
+    listen_delete_task();
+    listen_detail();
+    listen_checkbox();
+
+  }*/
   function render_task_list() {
     var $task_list = $('.task-list');
     $task_list.html('');

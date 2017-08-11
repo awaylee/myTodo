@@ -131,3 +131,17 @@ button:hover{
 input[name=title]{
     width: 100%;
 }
+.task-item.completed{
+    color: #aaa;
+    text-decoration:blink;
+    background: rgba(255,255,255,.8);
+}
+.task-item.completed:after{
+    content: '';
+    height: 1px;
+    width: 100%;
+    position: relative;
+    background: #aaa;
+    display: block;
+    top: -8px;
+}
